@@ -35,3 +35,19 @@ h1 {
 .error-label {
     font-size: 24px;
 }
+
+.table-panel {
+    margin-top: 20px;
+}
+
+.label-td {
+    text-align: right;
+}
+
+.td-header {
+    text-align: center;
+}
+
+.panel-heading {
+    text-align: center;
+}
