@@ -37,6 +37,9 @@ function handleKey(event, value) {
 }
 
 function setFocusToNextInput(value) {
-    if (value === 4 ) return;
+    if (value === 4 ) {
+        $("#input" + value).blur();
+        return;
+    }
     $("#input" + (value + 1)).focus();
 }
