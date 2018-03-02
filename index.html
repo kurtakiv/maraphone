@@ -46,27 +46,42 @@
                 <button class="btn btn-info btn-default btn-lg dropdown-toggle" type="button" id="dropdownAction"
                         data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true">
-                    Я хочу
+                    Ціль
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownAction">
-                    <li><a href="#" onclick="selectAction({title: 'Набір маси', value: 'upweight'})">Набір маси</a></li>
-                    <li><a href="#" onclick="selectAction({title: 'Схуднення', value: 'downweight'})">Схуднення</a></li>
+                    <li>
+                        <a href="#"
+                           onclick="selectAction({title: 'Набір маси', value: 'upweight'})">
+                            Набір маси
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           onclick="selectAction({title: 'Cхуднення, Підтримка', value: 'downweight'})">
+                            Cхуднення, Підтримка
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="col-md-offset-3 col-md-6 col-xs-12 form-group input-area">
-            <input class="col-md-12 col-xs-12" type="number" tabindex="1" class="form-control"
+            <input class="col-md-12 col-xs-12" type="number" onkeyup="handleKey(event, 1)" id="input1" tabindex="1"
+                   class="form-control"
                    placeholder="Маса тіла (кг)">
-            <input class="col-md-12 col-xs-12" type="number" tabindex="2" class="form-control"
+            <input class="col-md-12 col-xs-12" type="number" onkeyup="handleKey(event, 2)" id="input2" tabindex="2"
+                   class="form-control"
                    placeholder="Ріст (см)">
-            <input class="col-md-12 col-xs-12" type="number" tabindex="1" class="form-control"
+            <input class="col-md-12 col-xs-12" type="number" onkeyup="handleKey(event, 3)" id="input3" tabindex="3"
+                   class="form-control"
                    placeholder="Вік (роки)">
-            <input class="col-md-12 col-xs-12" type="number" tabindex="2" class="form-control"
+            <input class="col-md-12 col-xs-12" type="number" onkeyup="handleKey(event, 4)" id="input4" tabindex="4"
+                   class="form-control"
                    placeholder="Зап'ястя (см)">
         </div>
 
-        <button class=" col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 btn btn-info btn-default btn-lg dropdown-toggle" type="button" id="dropdownSubmit"
+        <button class=" col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 btn btn-info btn-default btn-lg dropdown-toggle"
+                type="button" id="dropdownSubmit"
                 data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="true">
             Обчислити

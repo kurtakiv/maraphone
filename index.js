@@ -29,3 +29,14 @@ function selectAction(param) {
     data.action = param.value;
     $("#dropdownAction").text(param.title);
 }
+
+function handleKey(event, value) {
+    if (event.which === 13) {
+        setFocusToNextInput(value);
+    }
+}
+
+function setFocusToNextInput(value) {
+    if (value === 4 ) return;
+    $("#input" + (value + 1)).focus();
+}
