@@ -10,6 +10,7 @@ input {
 
 h1 {
     text-align: center;
+    font-weight: 300;
 }
 .input-area {
     margin-top: 20px;
