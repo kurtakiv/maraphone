@@ -28,9 +28,49 @@
 <body>
 <div class="content">
     <div class="panel panel-default col-md-12">
-        <h1>Тут буде нове тіло</h1>
-        <input class="col-md-offset-3 col-md-6 col-xs-12" type="text" tabindex="1" class="form-control" placeholder="Вага">
-        <input class="col-md-offset-3 col-md-6 col-xs-12" type="text" tabindex="2" class="form-control" placeholder="Вага">
+        <h1 class="col-md-offset-3 col-md-6  col-md-offset-3 col-xs-12">НОВЕ ТІЛО</h1>
+        <div class="col-md-offset-3 col-md-6 col-xs-12">
+            <div class="dropdown  col-md-6 col-xs-6">
+                <button class="btn btn-info btn-default btn-lg dropdown-toggle" type="button" id="dropdownSex"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    Стать
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownSex">
+                    <li><a href="#" onclick="selectSex({title: 'Чоловік', value: 'man'})">Чоловік</a></li>
+                    <li><a href="#" onclick="selectSex({title: 'Жінка', value: 'woman'})">Жінка</a></li>
+                </ul>
+            </div>
+            <div class="dropdown  col-md-6 col-xs-6">
+                <button class="btn btn-info btn-default btn-lg dropdown-toggle" type="button" id="dropdownAction"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    Я хочу
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownAction">
+                    <li><a href="#" onclick="selectAction({title: 'Набір маси', value: 'upweight'})">Набір маси</a></li>
+                    <li><a href="#" onclick="selectAction({title: 'Схуднення', value: 'downweight'})">Схуднення</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-offset-3 col-md-6 col-xs-12 form-group input-area">
+            <input class="col-md-12 col-xs-12" type="text" tabindex="1" class="form-control"
+                   placeholder="Маса тіла (кг)">
+            <input class="col-md-12 col-xs-12" type="text" tabindex="2" class="form-control"
+                   placeholder="Ріст (см)">
+            <input class="col-md-12 col-xs-12" type="text" tabindex="1" class="form-control"
+                   placeholder="Вік (роки)">
+            <input class="col-md-12 col-xs-12" type="text" tabindex="2" class="form-control"
+                   placeholder="Зап'ястя (см)">
+        </div>
+
+        <button class=" col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 btn btn-info btn-default btn-lg dropdown-toggle" type="button" id="dropdownSubmit"
+                data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="true">
+            Обчислити
+        </button>
     </div>
 </div>
 </body>
