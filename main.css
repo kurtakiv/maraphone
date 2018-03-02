@@ -27,3 +27,11 @@ h1 {
 .dropdown .dropdown-menu {
     width: 100%;
 }
+
+.hide-label {
+    display: none;
+}
+
+.error-label {
+    font-size: 24px;
+}

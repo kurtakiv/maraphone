@@ -2,10 +2,13 @@ var data = {
     sex: null,
     action: null,
     height: null,
-    weight: null
+    weight: null,
+    wrist: null,
+    age: null
 };
 
-function tryToCall() {
+function submit() {
+    if (!validate()) return;
     var url ="https://c5541kbw26.execute-api.us-east-2.amazonaws.com/prod/";
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -17,7 +20,7 @@ function tryToCall() {
 
 
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(JSON.stringify({form: "232"}));
+    xhr.send(JSON.stringify(data));
 }
 
 function selectSex(param) {
@@ -42,4 +45,22 @@ function setFocusToNextInput(value) {
         return;
     }
     $("#input" + (value + 1)).focus();
+}
+
+function changeData(event, field, value) {
+  data[field] = value;
+}
+
+function validate() {
+    var labelId = "#error-message";
+    for (var key in data) {
+        if (!data[key]) {
+            $(labelId).removeClass("hide-label");
+            return false;
+        }
+    }
+    if (!$(labelId).hasClass("hide-label")) {
+        $(labelId).addClass("hide-label");
+    }
+    return true;
 }

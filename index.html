@@ -17,7 +17,6 @@
 
     <script>
         $(document).ready(function () {
-            tryToCall();
 
             $("#text").on("change", function (ev) {
                 console.log(ev);
@@ -66,24 +65,25 @@
             </div>
         </div>
         <div class="col-md-offset-3 col-md-6 col-xs-12 form-group input-area">
-            <input class="col-md-12 col-xs-12" type="number" onkeyup="handleKey(event, 1)" id="input1" tabindex="1"
+            <input class="col-md-12 col-xs-12" onchange="changeData(event, 'weight', this.value)" type="number" onkeyup="handleKey(event, 1)" id="input1" tabindex="1"
                    class="form-control"
                    placeholder="Маса тіла (кг)">
-            <input class="col-md-12 col-xs-12" type="number" onkeyup="handleKey(event, 2)" id="input2" tabindex="2"
+            <input class="col-md-12 col-xs-12" onchange="changeData(event, 'height', this.value)"  type="number" onkeyup="handleKey(event, 2)" id="input2" tabindex="2"
                    class="form-control"
                    placeholder="Ріст (см)">
-            <input class="col-md-12 col-xs-12" type="number" onkeyup="handleKey(event, 3)" id="input3" tabindex="3"
+            <input class="col-md-12 col-xs-12" onchange="changeData(event, 'age', this.value)" type="number" onkeyup="handleKey(event, 3)" id="input3" tabindex="3"
                    class="form-control"
                    placeholder="Вік (роки)">
-            <input class="col-md-12 col-xs-12" type="number" onkeyup="handleKey(event, 4)" id="input4" tabindex="4"
+            <input class="col-md-12 col-xs-12" onchange="changeData(event, 'wrist', this.value)" type="number" onkeyup="handleKey(event, 4)" id="input4" tabindex="4"
                    class="form-control"
                    placeholder="Зап'ястя (см)">
         </div>
-
+        <label  id="error-message" class=" col-md-offset-3  col-md-6 col-xs-12 hide-label error-label label label-warning">Заповніть всі поля</label>
         <button class=" col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 btn btn-info btn-default btn-lg dropdown-toggle"
-                type="button" id="dropdownSubmit"
+                type="button" id="buttonSubmit"
                 data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="true">
+                aria-haspopup="true" aria-expanded="true"
+                onclick="submit()">
             Обчислити
         </button>
     </div>
