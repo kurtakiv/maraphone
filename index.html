@@ -51,14 +51,20 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownAction">
                     <li>
                         <a href="#"
-                           onclick="selectAction({title: 'Набір маси', value: 'upweight'})">
+                           onclick="selectAction({title: 'Набір маси', value: 'upWeight'})">
                             Набір маси
                         </a>
                     </li>
                     <li>
                         <a href="#"
-                           onclick="selectAction({title: 'Cхуднення, Підтримка', value: 'downweight'})">
-                            Cхуднення, Підтримка
+                           onclick="selectAction({title: 'Cхуднення', value: 'downWeight'})">
+                            Cхуднення
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           onclick="selectAction({title: 'Підтримка', value: 'saveWeight'})">
+                            Підтримка
                         </a>
                     </li>
                 </ul>
@@ -90,34 +96,29 @@
         <div class="table-panel col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 panel panel-default">
             <!-- Table -->
             <div class="panel-heading">Результати обчислень</div>
-            <table class="table">
-
-                <tr >
-                    <td class="td-header" colspan="2">Розрахунок величини основного обміну</td>
+            <table class="table hide-table" id="table">
+                <tr>
+                    <td class="label-td col-md-6 col-xs-6" >Величина основного обміну = </td>
+                    <td class="col-md-6 col-xs-6" id="vvotd"></td>
                 </tr>
                 <tr>
-                    <td class="label-td">ВВО = </td>
-                    <td>5435</td>
+                    <td class="td-header" colspan="2">Енергозатрати для схуднення</td>
                 </tr>
                 <tr>
-                    <td class="td-header" colspan="2">Загальні енергозатрати</td>
-                </tr>
-
-                <tr>
-                    <td class="label-td">ОЄ + 10% =</td>
-                    <td>5435</td>
+                    <td class="label-td col-md-6 col-xs-6">Денна норма білків = </td>
+                    <td class="col-md-6 col-xs-6" id="snbtd"></td>
                 </tr>
                 <tr>
-                    <td class="label-td">СНБ =</td>
-                    <td>5435</td>
+                    <td class="label-td col-md-6 col-xs-6">Денна нома жирів =</td>
+                    <td class="col-md-6 col-xs-6" id="sngtd"></td>
                 </tr>
                 <tr>
-                    <td class="label-td">СНЖ =</td>
-                    <td>5435</td>
+                    <td class="label-td col-md-6 col-xs-6">Денна нома вуглеводів =</td>
+                    <td class="col-md-6 col-xs-6" id="snutd"></td>
                 </tr>
                 <tr>
-                    <td class="label-td">СНСУ =</td>
-                    <td>5435</td>
+                    <td class="label-td col-md-6 col-xs-6">Денна нома простих вуглеводів =</td>
+                    <td class="col-md-6 col-xs-6" id="snsutd"></td>
                 </tr>
             </table>
         </div>

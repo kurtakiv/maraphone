@@ -14,8 +14,15 @@ function submit() {
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function () {//Вызывает функцию при смене состояния.
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-            console.log(xhr.response);
+           var result = JSON.parse(xhr.response).result;
+            $("#vvotd").text(result.vvo);
+            $("#snbtd").text(result.snb);
+            $("#sngtd").text(result.sng);
+            $("#snutd").text(result.snu);
+            $("#snsutd").text(result.snsu);
+            $("#table").removeClass("hide-table");
         }
+
     };
 
 

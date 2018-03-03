@@ -28,7 +28,7 @@ h1 {
     width: 100%;
 }
 
-.hide-label {
+.hide-label, .hide-table {
     display: none;
 }
 
