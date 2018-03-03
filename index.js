@@ -8,6 +8,7 @@ var data = {
 };
 
 function submit() {
+    $("#error-message2").addClass("hide-table");
     if (!validate()) return;
     var url ="https://c5541kbw26.execute-api.us-east-2.amazonaws.com/prod/";
     var xhr = new XMLHttpRequest();
@@ -20,9 +21,12 @@ function submit() {
             $("#sngtd").text(result.sng);
             $("#snutd").text(result.snu);
             $("#snsutd").text(result.snsu);
+            $("#oetd").text(result.oe);
             $("#table").removeClass("hide-table");
         }
-
+        if (xhr.status !== 200) {
+            $("#error-message2").removeClass("hide-table");
+        }
     };
 
 
