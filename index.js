@@ -16,12 +16,12 @@ function submit() {
     xhr.onreadystatechange = function () {//Вызывает функцию при смене состояния.
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
            var result = JSON.parse(xhr.response).result;
-            $("#vvotd").text(result.vvo);
-            $("#snbtd").text(result.snb);
-            $("#sngtd").text(result.sng);
-            $("#snutd").text(result.snu);
-            $("#snsutd").text(result.snsu);
-            $("#oetd").text(result.oe);
+            $("#vvotd").text(result.vvo + " кКал");
+            $("#snbtd").text(result.snb + " г");
+            $("#sngtd").text(result.sng + " г");
+            $("#snutd").text(result.snu + " г");
+            $("#snsutd").text(result.snsu + " г");
+            $("#oetd").text(result.oe + " кКал");
             $("#table").removeClass("hide-table");
         }
         if (xhr.status !== 200) {

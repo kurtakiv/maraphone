@@ -51,3 +51,12 @@ h1 {
 .panel-heading {
     text-align: center;
 }
+
+.header-link {
+    text-decoration: none;
+    color:black;
+}
+
+.header-link:hover {
+    color: black;
+}
