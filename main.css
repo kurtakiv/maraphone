@@ -65,3 +65,11 @@ h1 {
 .header-link:hover {
     color: black;
 }
+
+.calculation-panel {
+    display: none;
+}
+
+#error-message3 {
+    margin-top: 30px;
+}

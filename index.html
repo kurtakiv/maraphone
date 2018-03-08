@@ -26,8 +26,23 @@
 </head>
 <body>
 <div class="content">
-    <h1>Упс, обрахунок тимчасово не доступний</h1>
-   <!-- <div class="panel panel-default col-md-12 content-child">
+    <div id="login-form" class="col-md-offset-3 col-md-6  col-md-offset-3 col-xs-12">
+        <div class="form-group">
+            <label for="passwordInput">Password</label>
+            <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+            <button class="col-md-12 col-xs-12 btn btn-info btn-default btn-lg"
+                    style="margin-top:30px"
+                    type="button" id="buttonLogin"
+                    aria-haspopup="true" aria-expanded="true"
+                    onclick="login()">
+                Увійти
+            </button>
+            <label id="error-message3"
+                   class="col-md-12 col-xs-12 hide-label error-label label label-danger">Не вірний пароль</label>
+        </div>
+
+    </div>
+   <div id="calculation-panel" class="panel panel-default col-md-12 content-child calculation-panel">
         <h1 class="col-md-offset-3 col-md-6  col-md-offset-3 col-xs-12">
         <a class="header-link" href="http://nove-tilo.com/" style="text-decoration: none"> НОВЕ ТІЛО</a>
         <a href="https://instagram.com/nove.tilo" >@nove.tilo</a>
@@ -101,7 +116,6 @@
         </button>
 
         <div class="table-panel col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 panel panel-default">
-            &lt;!&ndash; Table &ndash;&gt;
             <div class="panel-heading">Результати обчислень</div>
             <table class="table hide-table" id="table">
                 <tr>
@@ -130,7 +144,7 @@
                 </tr>
             </table>
         </div>
-    </div>-->
+    </div>
 </div>
 </body>
 </html>
