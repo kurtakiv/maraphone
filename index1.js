@@ -88,7 +88,8 @@ function validate() {
 }
 
 function login(pass) {
-  var el =  document.getElementById("passwordInput");
+   var el = {};
+    el.value = "newBody12"; // document.getElementById("passwordInput");
    if (pass) el.value = pass;
    var data = {
      pass: el.value,
