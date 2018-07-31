@@ -1,0 +1,21 @@
+{
+  "name": "new-body",
+  "version": "1.0.0",
+  "description": "App to caclculate food count",
+  "main": "index.js",
+  "author": "mykhailo.semeniuk",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "react": "^16.4.1",
+    "sass": "^1.10.1"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "css-loader": "^1.0.0",
+    "sass-loader": "^7.0.3",
+    "webpack": "^4.16.3",
+    "webpack-dev-server": "^3.1.5"
+  }
+}
