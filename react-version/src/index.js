@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import LoginWindow from "./loginWindow/loginWindow.js"
+import {Provider} from 'react-redux';
+import {mainStore} from "./store";
+
 class App extends Component {
   render() {
     return (
-      <LoginWindow/>
+      <Provider store={ mainStore }>
+        <LoginWindow/>
+      </Provider>
     );
   }
 }

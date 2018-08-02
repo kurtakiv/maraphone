@@ -2,9 +2,18 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import axios from 'axios';
 import {apiUrl} from "../constants";
+import {connect} from 'react-redux'
+
 
 class LoginWindow extends Component {
-  state = {showError: false, passwordValue: ""};
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showError: false,
+    };
+    console.log(this.state);
+  }
 
   clickOnLogin = (d) => {
     axios({
@@ -70,4 +79,10 @@ class LoginWindow extends Component {
   }
 }
 
-export default LoginWindow;
+const mapStateToProps = state => {
+  return {
+    passwordValue: state.passwordValue
+  }
+};
+
+export default connect(mapStateToProps, null)(LoginWindow);
