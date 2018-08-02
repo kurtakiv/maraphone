@@ -35,7 +35,8 @@
   },
   "babel": {
     "presets": [
-      "react"
+      "react",
+      "stage-2"
     ]
   }
 }
