@@ -9,10 +9,10 @@ class LoginWindow extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state ={
       showError: false,
-    };
-    console.log(this.state);
+      passwordValue: this.props.passwordValue
+     };
   }
 
   clickOnLogin = (d) => {
@@ -81,7 +81,7 @@ class LoginWindow extends Component {
 
 const mapStateToProps = state => {
   return {
-    passwordValue: state.passwordValue
+    passwordValue: state.value.passwordValue
   }
 };
 
