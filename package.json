@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/kurtakiv/maraphone/issues"
   },
-  "homepage": "https://github.com/kurtakiv/maraphone#readme"
+  "homepage": "https://github.com/kurtakiv/maraphone#readme",
+  "dependencies": {}
 }
