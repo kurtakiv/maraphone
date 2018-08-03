@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import LoginWindow from "./loginWindow/loginWindow.js"
+import App from "./App"
 import {Provider} from 'react-redux';
 import {mainStore} from "./store";
 
-class App extends Component {
+class NewBody extends Component {
   render() {
     return (
       <Provider store={ mainStore }>
-        <LoginWindow/>
+        <App/>
       </Provider>
     );
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('newBodyBody'));
+ReactDOM.render(<NewBody/>, document.getElementById('newBodyBody'));
 

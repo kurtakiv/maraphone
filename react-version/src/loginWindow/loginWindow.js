@@ -2,17 +2,18 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import axios from 'axios';
 import {apiUrl} from "../constants";
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import {ACTIONS} from "../store";
 
 
 class LoginWindow extends Component {
   constructor(props) {
     super(props);
 
-    this.state ={
+    this.state = {
       showError: false,
       passwordValue: this.props.passwordValue
-     };
+    };
   }
 
   clickOnLogin = (d) => {
@@ -25,11 +26,11 @@ class LoginWindow extends Component {
         authRequest: true
       })
     }).then((result) => {
-      result = JSON.parse(result);
-      if (result.errorMessage) {
-        this.setErrorMessageState(true);
+      if (result.data && result.data.result) {
+        this.setErrorMessageState(false);
+        this.props.onAuthorize(true);
       } else {
-        alert('aaa');
+        this.setErrorMessageState(true)
       }
     }).catch((error) => {
       this.setErrorMessageState(true);
@@ -48,11 +49,9 @@ class LoginWindow extends Component {
     this.setState({showError: value});
   }
 
-
   updatePasswordValue(event) {
     this.setState({passwordValue: event.target.value})
   }
-
 
   render() {
     return (
@@ -81,8 +80,17 @@ class LoginWindow extends Component {
 
 const mapStateToProps = state => {
   return {
-    passwordValue: state.value.passwordValue
+    passwordValue: state.value.passwordValue,
+    isAuthorized: state.value.isAuthorized
   }
 };
 
-export default connect(mapStateToProps, null)(LoginWindow);
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuthorize: (isAuthorized) => {
+      dispatch({type: ACTIONS.SET_IS_AUTHORIZED, value: {isAuthorized: true}});
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginWindow);
