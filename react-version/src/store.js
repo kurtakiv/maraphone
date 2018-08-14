@@ -17,6 +17,6 @@ const mainStoreReducer = (state = {}, action) => {
   }
 };
 
-const mainStore = createStore(mainStoreReducer, {type: ACTIONS.SET_PASS, value: {passwordValue: "", isAuthorized: true}});
+const mainStore = createStore(mainStoreReducer, {type: ACTIONS.SET_PASS, value: {passwordValue: "", isAuthorized: false}});
 
 export {ACTIONS, mainStore};

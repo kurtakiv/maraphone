@@ -113,8 +113,10 @@ class App extends Component {
             value: result.data.result[key]
           })
         }
-        console.log(resultArr);
         this.setState({results: resultArr});
+      }
+      if (result.data.errorMessage) {
+        this.setState({showError: true});
       }
     }).catch(() => {
       this.setState({showError: true});
@@ -123,7 +125,7 @@ class App extends Component {
 
   validateAndGetData() {
     let requestData =  {
-      pass: "900800700",//this.props.isAuthorized,
+      pass: this.props.passwordValue,
       sex: this.state.sex,
       action: this.state.action,
       height: this.state.height,

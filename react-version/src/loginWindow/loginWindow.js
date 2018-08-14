@@ -27,7 +27,7 @@ class LoginWindow extends Component {
     }).then((result) => {
       if (result.data && result.data.result) {
         this.setErrorMessageState(false);
-        this.props.onAuthorize(true);
+        this.props.onAuthorize(true, this.state.passwordValue);
       } else {
         this.setErrorMessageState(true)
       }
@@ -39,12 +39,12 @@ class LoginWindow extends Component {
 
   getErrorMessage() {
     if (!this.state.showError) return "";
-    return (<label className="col-md-12 col-xs-12 hide-label error-label label label-danger">Не вірний пароль
+    return (
+      <label className="col-md-12 col-xs-12 hide-label error-label label label-danger">Не вірний пароль
     </label>);
   }
 
   setErrorMessageState(value) {
-
     this.setState({showError: value});
   }
 
@@ -86,8 +86,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuthorize: (isAuthorized) => {
-      dispatch({type: ACTIONS.SET_IS_AUTHORIZED, value: {isAuthorized: true}});
+    onAuthorize: (isAuthorized, passwordValue) => {
+      dispatch({type: ACTIONS.SET_IS_AUTHORIZED, value: {isAuthorized: isAuthorized}});
+      dispatch({type: ACTIONS.SET_PASS, value: {passwordValue: passwordValue}});
     }
   }
 };
