@@ -3,10 +3,18 @@ import LoginWindow from './loginWindow/loginWindow'
 import {connect} from 'react-redux';
 import DropDown from "../src/dropDown/dropDown";
 import Input from "./input/input";
+import Label, {LABEL_TYPES} from "./label/label";
+import axios from 'axios';
+import {apiUrl} from "./constants";
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      sex: null,
+      action: null,
+      results: []
+    };
 
     this.sexDropDown = {
       title: "Стать",
@@ -49,15 +57,69 @@ class App extends Component {
         }
       },
     ];
+
+    this.resultMap = {
+      oe: {
+        title: "Добова норма калорій", points: "кКал"
+      },
+      vvo: {
+        title: "Величина основного обміну", points: "кКал"
+      },
+      snb: {
+        title: "Добова норма білків", points: "г"
+      },
+      sng: {
+        title: "Добова норма жирів", points: "г"
+      },
+      snu: {
+        title: "Загальна добова норма вуглеводів", points: "г"
+      },
+      snsu: {
+        title: "Добова норма складних вуглеводів", points: "г"
+      },
+    }
   }
 
   onSelectSex(sex) {
     this.setState({sex});
-    console.log(sex);
   }
 
   onSelectAction(action) {
     this.setState({action})
+  }
+
+  submit() {
+    axios({
+      method: 'post',
+      url: apiUrl,
+      contentType: "application/x-www-form-urlencoded",
+      data: JSON.stringify({
+        pass: "900800700",//this.props.isAuthorized,
+        sex: this.state.sex,
+        action: this.state.action,
+        height: this.state.height,
+        weight: this.state.weight,
+        age: this.state.age,
+        wrist: this.state.wrist,
+      })
+    }).then((result) => {
+      if (result.data && result.data.result) {
+        //this.setState(result);
+        let resultArr = [];
+        for (let key in result.data.result) {
+          resultArr.push({
+            title: this.resultMap[key].title,
+            points: this.resultMap[key].points,
+            value: result.data.result[key]
+          })
+        }
+        console.log(resultArr);
+        this.setState({results: resultArr});
+      }
+    }).catch((error) => {
+
+      console.log(error);
+    });
   }
 
   getComponent() {
@@ -69,12 +131,12 @@ class App extends Component {
         </h1>
 
         <div className="col-md-offset-3 col-md-6 col-xs-12">
-          <DropDown title={ this.sexDropDown.title }
+          <DropDown title={ this.state.sex || this.sexDropDown.title }
                     items={ this.sexDropDown.items }
                     onSelect={ (sex) => this.onSelectSex(sex) }
           />
           <DropDown
-            title={ this.actionDropDown.title }
+            title={ this.state.action || this.actionDropDown.title }
             items={ this.actionDropDown.items }
             onSelect={ (action) => this.onSelectAction(action) }
           />
@@ -84,14 +146,8 @@ class App extends Component {
             return (<Input config={ inputConfig } key={ index }/>)
           }) }
         </div>
-
-        <label id="error-message"
-               className=" col-md-offset-3  col-md-6 col-xs-12 hide-label error-label label label-warning">Заповніть всі
-          поля</label>
-        <label id="error-message2"
-               className=" col-md-offset-3  col-md-6 col-xs-12 hide-label error-label label label-danger">Не вдалось
-          обчислити</label>
-        { /*onClick="submit()"*/ }
+        <Label type={ LABEL_TYPES.WARNING } text={ "Заповніть всі поля" }/>
+        <Label type={ LABEL_TYPES.ERROR } text={ "Не вдалось обчислити" }/>
 
         <button
           className="col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 btn btn-info btn-default btn-lg dropdown-toggle"
@@ -99,38 +155,25 @@ class App extends Component {
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="true"
+          onClick={ () => this.submit() }
         >
           Обчислити
         </button>
 
         <div className="table-panel col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 panel panel-default">
           <div className="panel-heading">Результати обчислень</div>
-          { /*<table className="table hide-table" id="table">
-            <tr>
-              <td className="label-td col-md-6 col-xs-6">Величина основного обміну =</td>
-              <td className="col-md-6 col-xs-6" id="vvotd"></td>
-            </tr>
-            <tr>
-              <td className="label-td col-md-6 col-xs-6">Добова норма калорій =</td>
-              <td className="col-md-6 col-xs-6" id="oetd"></td>
-            </tr>
-            <tr>
-              <td className="label-td col-md-6 col-xs-6">Добова норма білків =</td>
-              <td className="col-md-6 col-xs-6" id="snbtd"></td>
-            </tr>
-            <tr>
-              <td className="label-td col-md-6 col-xs-6">Добова норма жирів =</td>
-              <td className="col-md-6 col-xs-6" id="sngtd"></td>
-            </tr>
-            <tr>
-              <td className="label-td col-md-6 col-xs-6">Загальна добова норма вуглеводів =</td>
-              <td className="col-md-6 col-xs-6" id="snutd"></td>
-            </tr>
-            <tr>
-              <td className="label-td col-md-6 col-xs-6">Добова норма складних вуглеводів =</td>
-              <td className="col-md-6 col-xs-6" id="snsutd"></td>
-            </tr>
-          </table>*/ }
+          <table className="table hide-table" id="table">
+            <tbody>
+            { this.state.results.map((item, index) => {
+              return (
+                <tr key={ index }>
+                  <td className="label-td col-md-6 col-xs-6">{ item.title + " =" }</td>
+                  <td className="col-md-6 col-xs-6">{ `${item.value} ${item.points}`}</td>
+                </tr>
+              )
+            }) }
+            </tbody>
+          </table>
         </div>
       </div>
     )
