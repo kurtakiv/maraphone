@@ -13,7 +13,13 @@ class App extends Component {
     this.state = {
       sex: null,
       action: null,
-      results: []
+      height: null,
+      weight: null,
+      age: null,
+      wrist: null,
+      results: [],
+      showError: false,
+      showWarning: false
     };
 
     this.sexDropDown = {
@@ -89,22 +95,16 @@ class App extends Component {
   }
 
   submit() {
+    let requestData = this.validateAndGetData();
+    if (!requestData) return;
+    this.hideMessages();
     axios({
       method: 'post',
       url: apiUrl,
       contentType: "application/x-www-form-urlencoded",
-      data: JSON.stringify({
-        pass: "900800700",//this.props.isAuthorized,
-        sex: this.state.sex,
-        action: this.state.action,
-        height: this.state.height,
-        weight: this.state.weight,
-        age: this.state.age,
-        wrist: this.state.wrist,
-      })
+      data: JSON.stringify(requestData)
     }).then((result) => {
       if (result.data && result.data.result) {
-        //this.setState(result);
         let resultArr = [];
         for (let key in result.data.result) {
           resultArr.push({
@@ -116,10 +116,44 @@ class App extends Component {
         console.log(resultArr);
         this.setState({results: resultArr});
       }
-    }).catch((error) => {
-
-      console.log(error);
+    }).catch(() => {
+      this.setState({showError: true});
     });
+  }
+
+  validateAndGetData() {
+    let requestData =  {
+      pass: "900800700",//this.props.isAuthorized,
+      sex: this.state.sex,
+      action: this.state.action,
+      height: this.state.height,
+      weight: this.state.weight,
+      age: this.state.age,
+      wrist: this.state.wrist,
+    };
+
+    for (let key in requestData) {
+      if (requestData[key] === null) {
+        this.setState({showWarning: true});
+        return null;
+      }
+    }
+    return requestData;
+  }
+
+  getMessage() {
+    switch (true){
+      case this.state.showWarning:
+        return (<Label type={ LABEL_TYPES.WARNING } text={ "Заповніть всі поля" }/>);
+      case this.state.showError:
+        return (<Label type={ LABEL_TYPES.ERROR } text={ "Не вдалось обчислити" }/>);
+      default: break;
+    }
+  }
+
+  hideMessages(){
+    this.setState({showWarning: false});
+    this.setState({showError: false});
   }
 
   getComponent() {
@@ -146,9 +180,7 @@ class App extends Component {
             return (<Input config={ inputConfig } key={ index }/>)
           }) }
         </div>
-        <Label type={ LABEL_TYPES.WARNING } text={ "Заповніть всі поля" }/>
-        <Label type={ LABEL_TYPES.ERROR } text={ "Не вдалось обчислити" }/>
-
+        {this.getMessage()}
         <button
           className="col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 btn btn-info btn-default btn-lg dropdown-toggle"
           type="button"
@@ -159,7 +191,6 @@ class App extends Component {
         >
           Обчислити
         </button>
-
         <div className="table-panel col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 panel panel-default">
           <div className="panel-heading">Результати обчислень</div>
           <table className="table hide-table" id="table">
