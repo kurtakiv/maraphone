@@ -7,13 +7,20 @@ const htmlPlugin = new HtmlWebPackPlugin({
   filename: "./index.html"
 });
 
+providePlugin = new webpack.ProvidePlugin({
+  $: "jquery",
+  jquery: "jquery",
+  "window.jQuery": "jquery",
+  jQuery: "jquery"
+});
+
 module.exports = {
   devServer: {
     contentBase: "dist"
   },
   entry: {
     "index": path.resolve(__dirname, "src/index.js"),
-    "vendor": ['babel-es6-polyfill', 'react']
+    "vendor": ['babel-es6-polyfill', 'react', 'jquery', 'bootstrap']
   },
   output: {
     filename: "[name].js",
@@ -36,5 +43,5 @@ module.exports = {
         use: ["url-loader"]
       },]
   },
-  plugins: [htmlPlugin]
+  plugins: [htmlPlugin, providePlugin]
 };

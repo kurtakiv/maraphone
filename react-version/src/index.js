@@ -5,7 +5,6 @@ import {Provider} from 'react-redux';
 import {mainStore} from "./store";
 import "./index.scss";
 import "bootstrap/dist/css/bootstrap.css"
-import "jquery/dist/jquery.min"
 import "bootstrap/dist/js/bootstrap.min";
 
 class NewBody extends Component {

@@ -13,6 +13,7 @@ class App extends Component {
   }
   onSelectSex(sex) {
     this.setState({sex});
+    console.log(sex);
   }
 
   getComponent() {

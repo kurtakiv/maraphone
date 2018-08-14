@@ -1,5 +1,6 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/css/bootstrap.css";
+import "jquery/dist/jquery.min"
 const DropDown = (props) => {
   return (
     <div className="dropdown  col-md-6 col-xs-6">
