@@ -2,104 +2,110 @@ import React, {Component} from 'react';
 import LoginWindow from './loginWindow/loginWindow'
 import {connect} from 'react-redux';
 import DropDown from "../src/dropDown/dropDown";
+import Input from "./input/input";
+
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.sexDropDownItems = [
-      {title: "Чоловік", value: "man"},
-      {title: "Жінка", value: "woman"}
-    ]
+    this.sexDropDown = {
+      title: "Стать",
+      items: [
+        {title: "Чоловік", value: "man"},
+        {title: "Жінка", value: "woman"}
+      ]
+    };
+
+    this.actionDropDown = {
+      title: "Ціль",
+      items: [
+        {title: "Набір маси", value: "upWeight"},
+        {title: "Схуднення", value: "downWeight"},
+        {title: "Підтримка", value: "saveWeight"}
+      ]
+    };
+
+    this.inputs = [
+      {
+        placeholder: "Маса тіла (кг)",
+        onChange: (event) => {
+          this.setState({weight: event.target.value})
+        }
+      },
+      {
+        placeholder: "Зріст (см)",
+        onChange: (event) => {
+          this.setState({height: event.target.value})
+        }
+      }, {
+        placeholder: "Вік (роки)",
+        onChange: (event) => {
+          this.setState({age: event.target.value})
+        }
+      }, {
+        placeholder: "Зап'ястя (см)",
+        onChange: (event) => {
+          this.setState({wrist: event.target.value})
+        }
+      },
+    ];
   }
+
   onSelectSex(sex) {
     this.setState({sex});
     console.log(sex);
   }
 
+  onSelectAction(action) {
+    this.setState({action})
+  }
+
   getComponent() {
     return (
-      <div  className="panel panel-default col-md-12 content-child calculation-panel">
+      <div className="panel panel-default col-md-12 content-child calculation-panel">
         <h1 className="col-md-offset-3 col-md-6  col-md-offset-3 col-xs-12">
           <a className="header-link" href="http://nove-tilo.com/"> НОВЕ ТІЛО</a>
           <a href="https://instagram.com/nove.tilo">@nove.tilo</a>
         </h1>
 
         <div className="col-md-offset-3 col-md-6 col-xs-12">
-          <DropDown items={this.sexDropDownItems} onSelect={(sex) => this.onSelectSex(sex)}/>
-          <div className="dropdown  col-md-6 col-xs-6">
-            <button className="btn btn-info btn-default btn-lg dropdown-toggle" type="button" id="dropdownAction"
-                    data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="true">
-              Ціль
-              <span className="caret"></span>
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownAction">
-              <li>
-     {/*      selectAction({ title: 'Набір маси', value: 'upWeight' })*/}
-                <a href="#">
-                  Набір маси
-                </a>
-              </li>
-              <li>
-             {/* selectAction({title: 'Cхуднення', value: 'downWeight'})*/}
-                <a href="#">
-                  Cхуднення
-                </a>
-              </li>
-              <li>
-           {/*selectAction({ title: 'Підтримка', value: 'saveWeight' })*/}
-                <a href="#" >
-                  Підтримка
-                </a>
-              </li>
-            </ul>
-          </div>
+          <DropDown title={ this.sexDropDown.title }
+                    items={ this.sexDropDown.items }
+                    onSelect={ (sex) => this.onSelectSex(sex) }
+          />
+          <DropDown
+            title={ this.actionDropDown.title }
+            items={ this.actionDropDown.items }
+            onSelect={ (action) => this.onSelectAction(action) }
+          />
         </div>
         <div className="col-md-offset-3 col-md-6 col-xs-12 form-group input-area">
-          {/*changeData(event, 'weight', this.value)*/}
-          {/*onKeyUp="handleKey(event, 1)"*/}
-          <input className="col-md-12 col-xs-12" type="number"
-                id="input1" tabIndex="1"
-                 className="form-control"
-                 placeholder="Маса тіла (кг)"/>
-          {/*"changeData(event, 'height', this.value)*/}
-        {/*  onKeyUp="handleKey(event, 2)"*/}
-            <input className="col-md-12 col-xs-12" type="number"
-                   id="input2" tabIndex="2"
-                   className="form-control"
-                   placeholder="Зріст (см)"/>
-          {/*changeData(event, 'age', this.value)*/}
-         {/* onKeyUp="handleKey(event, 3)"*/}
-              <input className="col-md-12 col-xs-12"  type="number"
-                      id="input3" tabIndex="3"
-                     className="form-control"
-                     placeholder="Вік (роки)"/>
-          {/*onChange="changeData(event, 'wrist', this.value)"*/}
-         {/* onKeyUp="handleKey(event, 4)"*/}
-                <input className="col-md-12 col-xs-12"  type="number"
-                       id="input4" tabIndex="4"
-                       className="form-control"
-                       placeholder="Зап'ястя (см)"/>
+          { this.inputs.map((inputConfig, index) => {
+            return (<Input config={ inputConfig } key={ index }/>)
+          }) }
         </div>
+
         <label id="error-message"
                className=" col-md-offset-3  col-md-6 col-xs-12 hide-label error-label label label-warning">Заповніть всі
           поля</label>
         <label id="error-message2"
                className=" col-md-offset-3  col-md-6 col-xs-12 hide-label error-label label label-danger">Не вдалось
           обчислити</label>
-        {/*onClick="submit()"*/}
+        { /*onClick="submit()"*/ }
+
         <button
-          className=" col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 btn btn-info btn-default btn-lg dropdown-toggle"
-          type="button" id="buttonSubmit"
+          className="col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 btn btn-info btn-default btn-lg dropdown-toggle"
+          type="button"
           data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="true"
+          aria-haspopup="true"
+          aria-expanded="true"
         >
           Обчислити
         </button>
 
         <div className="table-panel col-md-offset-3 col-md-6 col-md-offset-3 col-xs-12 panel panel-default">
           <div className="panel-heading">Результати обчислень</div>
-          {/*<table className="table hide-table" id="table">
+          { /*<table className="table hide-table" id="table">
             <tr>
               <td className="label-td col-md-6 col-xs-6">Величина основного обміну =</td>
               <td className="col-md-6 col-xs-6" id="vvotd"></td>
@@ -124,16 +130,16 @@ class App extends Component {
               <td className="label-td col-md-6 col-xs-6">Добова норма складних вуглеводів =</td>
               <td className="col-md-6 col-xs-6" id="snsutd"></td>
             </tr>
-          </table>*/}
+          </table>*/ }
         </div>
       </div>
-      )
+    )
   }
 
   render() {
     return (
       <div>
-        {!this.props.isAuthorized ? <LoginWindow/> : this.getComponent()}
+        { !this.props.isAuthorized ? <LoginWindow/> : this.getComponent() }
       </div>
     )
   }
